@@ -1,0 +1,66 @@
+h2 {
+    text-align: left;
+}
+
+.App {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-x: hidden;
+}
+
+.container {
+    padding: 0 20px;
+}
+
+button {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 1rem 0;
+    font-family: inherit;
+    padding: 0.85em 1em;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    background-color: #61b7dc;
+    color: #fefefe;
+    &:focus,
+    &:hover {
+        background-color: #3aa5d3;
+        color: #fefefe;
+    }
+    &:active {
+        background-color: #1e87c3;
+        border-color: #3aa5d3;
+        color: #fff;
+    }
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-items: center;
+    align-items: center;
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    width: 300px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
