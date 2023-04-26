@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 const XLSX = require('xlsx');
@@ -47,7 +47,9 @@ let fetchData = async (
         setStatus(`Fetching page ${i} of ${70} from ${targetUrl + pageNumber}`);
 
         try {
-            const response = await fetch(targetUrl + pageNumber);
+            const response = await fetch(targetUrl + pageNumber, {
+                mode: 'cors',
+            });
             const data = await response.text();
             // Do something with the data
             const parser = new DOMParser();
@@ -99,7 +101,6 @@ let downloadExcelFile = (
 
     const data = [
         ['name', 'address', 'phone number', 'email', 'website'],
-        // ["name", "address"],
         ...formatBusinesses(businessList),
     ];
 
@@ -200,18 +201,16 @@ function App() {
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
-    const spanStyle = {
-        color: statusColor(status),
-        fontSize: '20px',
-        fontWeight: 'bold',
-    };
-
     useEffect(() => {
         if (businesses.length > 0 && shouldDownload) {
             downloadExcelFile(businesses, setStatus);
             shouldDownload = false;
         }
     }, [businesses]);
+
+    useEffect(() => {
+        logEvent(analytics, 'status', { status });
+    }, [analytics, status]);
 
     return (
         <div className="App">
@@ -226,7 +225,10 @@ function App() {
                     Download Excel Sheet of Sandyford Businesses
                 </button>
                 <h2>
-                    Current Status: <span style={spanStyle}>{status}</span>
+                    Current Status:{' '}
+                    <span className="status" color={statusColor(status)}>
+                        {status}
+                    </span>
                 </h2>
             </div>
 
