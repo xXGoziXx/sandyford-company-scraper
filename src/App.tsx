@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
- // Import the functions you need from the SDKs you need
-    import { initializeApp } from 'firebase/app';
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 const XLSX = require('xlsx');
 
 let shouldDownload = false;
@@ -180,15 +181,16 @@ let statusColor = (status: string) => {
     }
 };
 
-   // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: 'AIzaSyDFNAn68aUgO5pjA-ChKYTbKBv1qCUY-B4',
-        authDomain: 'sandyford-company-scraper.firebaseapp.com',
-        projectId: 'sandyford-company-scraper',
-        storageBucket: 'sandyford-company-scraper.appspot.com',
-        messagingSenderId: '994758622903',
-        appId: '1:994758622903:web:d954472c7e463538e49732',
-    };
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: 'AIzaSyDFNAn68aUgO5pjA-ChKYTbKBv1qCUY-B4',
+    authDomain: 'sandyford-company-scraper.firebaseapp.com',
+    projectId: 'sandyford-company-scraper',
+    storageBucket: 'sandyford-company-scraper.appspot.com',
+    messagingSenderId: '994758622903',
+    appId: '1:994758622903:web:d954472c7e463538e49732',
+    measurementId: 'G-PPXFTXQ8R7',
+};
 
 function App() {
     const [businesses, setBusinesses] = useState<Element[]>([]);
@@ -196,6 +198,7 @@ function App() {
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
 
     const spanStyle = {
         color: statusColor(status),
