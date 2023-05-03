@@ -11,11 +11,11 @@
     "@types/node": "^16.18.24",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
-    "@types/xlsx": "^0.0.36",
+    "@types/xlsx": "^0.0.35",
     "firebase": "^9.20.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "sass": "^1.62.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
@@ -45,5 +45,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
+    "autoprefixer": "^10.4.14",
+    "tailwindcss": "^3.3.2"
   }
 }

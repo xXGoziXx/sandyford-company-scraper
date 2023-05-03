@@ -33,6 +33,9 @@ let fetchData = async (
     setStatus('Fetching data...');
 
     const businesses: Element[] = [];
+
+    const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/'; // The URL of the CORS Anywhere proxy server
+
     const targetUrl = 'https://www.sandyford.ie/business-directory/P';
 
     for (let i = 0; i < 70; i++) {
@@ -47,9 +50,14 @@ let fetchData = async (
         setStatus(`Fetching page ${i} of ${70} from ${targetUrl + pageNumber}`);
 
         try {
-            const response = await fetch(targetUrl + pageNumber, {
-                mode: 'cors',
-            });
+            const response = await fetch(
+                corsAnywhereUrl + targetUrl + pageNumber,
+                {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest', // Required by CORS Anywhere
+                    },
+                }
+            );
             const data = await response.text();
             // Do something with the data
             const parser = new DOMParser();
@@ -81,7 +89,7 @@ let downloadExcelFile = (
     setStatus: React.Dispatch<React.SetStateAction<string>>
 ) => {
     console.log('Creating the Excel file...');
-    setStatus('Creating the Excel file...');
+    setStatus('Creating the Excel fi le...');
 
     const businessList = businesses.map((business: Element) => {
         if (business) {
@@ -226,7 +234,7 @@ function App() {
                 </button>
                 <h2>
                     Current Status:{' '}
-                    <span className="status" color={statusColor(status)}>
+                    <span className={`status text-${statusColor(status)}-500`}>
                         {status}
                     </span>
                 </h2>

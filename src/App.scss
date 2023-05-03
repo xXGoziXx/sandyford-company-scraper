@@ -1,3 +1,6 @@
+@tailwind components;
+@tailwind utilities;
+
 h2 {
     text-align: left;
 }
@@ -14,8 +17,8 @@ h2 {
 }
 
 .status {
-    font-size: '20px';
-    font-weight: 'bold';
+    font-size: 20px;
+    font-weight: bold;
 }
 
 button {
